@@ -1,0 +1,67 @@
+.unicorn-crud {
+  margin-top: 2rem;
+}
+
+.card {
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(160, 30, 30, 0.1);
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.error-message {
+  color: red;
+  padding: 1rem;
+  text-align: center;
+  background-color: rgba(255, 0, 0, 0.1);
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #ef4444;
+}
+
+/* Make the pencil and trash icons white */
+.p-button-rounded .pi {
+  color: white !important;
+}
+
+/* Ensure success button stays green */
+.p-button-success {
+  background-color: #22c55e !important;
+  border-color: #22c55e !important;
+}
+
+/* Ensure danger button stays red */
+.p-button-danger {
+  background-color: #ef4444 !important;
+  border-color: #ef4444 !important;
+}
+.field {
+  margin-bottom: 1.5rem;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
