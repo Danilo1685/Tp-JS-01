@@ -28,6 +28,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-image: url("/images/unicorn-bg.png");
 }
 
 h1 {
@@ -57,7 +58,7 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-image: url("/images/unicorn-bg.png");
   }
   a:hover {
     color: #747bff;

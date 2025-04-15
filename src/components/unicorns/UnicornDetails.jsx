@@ -7,56 +7,56 @@ import UnicornService from './UnicornService';
 import './UnicornDetails.css';
 
 function UnicornDetails() {
-  const [unicorn, setUnicorn] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [unicornio, setUnicornio] = useState(null);
+  const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchUnicorn() {
+    async function obtenerUnicornio() {
       try {
-        setLoading(true);
-        const data = await UnicornService.getUnicorn(id);
-        setUnicorn(data);
+        setCargando(true);
+        const datos = await UnicornService.getUnicorn(id);
+        setUnicornio(datos);
         setError(null);
       } catch (err) {
         console.error('Error al obtener el unicornio:', err);
-        setError('No se pudieron cargar los detalles del unicornio. Por favor, intenta nuevamente más tarde.');
+        setError('No se pudieron cargar los detalles del unicornio. Por favor, intentá nuevamente más tarde.');
       } finally {
-        setLoading(false);
+        setCargando(false);
       }
     }
 
-    fetchUnicorn();
+    obtenerUnicornio();
   }, [id]);
 
-  const handleBack = () => {
+  const volver = () => {
     navigate('/');
   };
 
-  const renderColorSwatch = (color) => (
+  const mostrarColor = (color) => (
     <div className="color-swatch" style={{ backgroundColor: color }}></div>
   );
 
-  const header = (
+  const encabezado = (
     <div className="unicorn-details-header">
-      <h2>{unicorn?.name || 'Detalles del Unicornio'}</h2>
+      <h2>{unicornio?.name || 'Nombre no disponible'}</h2>
     </div>
   );
 
-  const footer = (
+  const pie = (
     <div className="unicorn-details-footer">
       <Button 
         label="Volver a la lista" 
         icon="pi pi-arrow-left" 
         className="p-button-primary" 
-        onClick={handleBack} 
+        onClick={volver} 
       />
     </div>
   );
 
-  if (loading) {
+  if (cargando) {
     return (
       <div className="unicorn-details-loading">
         <ProgressSpinner />
@@ -74,13 +74,13 @@ function UnicornDetails() {
           label="Volver a la lista" 
           icon="pi pi-arrow-left" 
           className="p-button-primary" 
-          onClick={handleBack} 
+          onClick={volver} 
         />
       </div>
     );
   }
 
-  if (!unicorn) {
+  if (!unicornio) {
     return (
       <div className="unicorn-details-not-found">
         <h3>Unicornio no encontrado</h3>
@@ -89,7 +89,7 @@ function UnicornDetails() {
           label="Volver a la lista" 
           icon="pi pi-arrow-left" 
           className="p-button-primary" 
-          onClick={handleBack} 
+          onClick={volver} 
         />
       </div>
     );
@@ -97,25 +97,25 @@ function UnicornDetails() {
 
   return (
     <div className="unicorn-details-container">
-      <Card header={header} footer={footer} className="unicorn-details-card">
+      <Card header={encabezado} footer={pie} className="unicorn-details-card">
         <div className="unicorn-details-content">
           <div className="detail-item">
             <div className="detail-label">ID:</div>
-            <div className="detail-value">{unicorn._id}</div>
+            <div className="detail-value">{unicornio._id || 'No disponible'}</div>
           </div>
           <div className="detail-item">
             <div className="detail-label">Nombre:</div>
-            <div className="detail-value">{unicorn.name}</div>
+            <div className="detail-value">{unicornio.name || 'No disponible'}</div>
           </div>
           <div className="detail-item">
             <div className="detail-label">Edad:</div>
-            <div className="detail-value">{unicorn.age}</div>
+            <div className="detail-value">{unicornio.age || 'No disponible'}</div>
           </div>
           <div className="detail-item">
             <div className="detail-label">Color:</div>
             <div className="detail-value">
-              {unicorn.color}
-              {renderColorSwatch(unicorn.color)}
+              {unicornio.color || 'No disponible'}
+              {unicornio.color && mostrarColor(unicornio.color)}
             </div>
           </div>
         </div>

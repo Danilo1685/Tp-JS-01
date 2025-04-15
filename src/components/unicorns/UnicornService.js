@@ -1,4 +1,5 @@
-const API_URL = 'https://crudcrud.com/api/291aca8f61554110b6279ba8c84fc202/unicorns'
+const API_URL =
+  'https://crudcrud.com/api/291aca8f61554110b6279ba8c84fc202/unicorns'
 
 class UnicornService {
   async getUnicorns() {
@@ -47,9 +48,9 @@ class UnicornService {
   }
 
   async updateUnicorn(id, unicorn) {
-    // The API doesn't accept _id in the request body
+    // API de CrudCrud no acepta _id en el cuerpo del PUT
     const { _id, ...unicornData } = unicorn
-    
+
     try {
       const response = await fetch(`${API_URL}/${id}`, {
         method: 'PUT',
@@ -85,4 +86,3 @@ class UnicornService {
 }
 
 export default new UnicornService()
-

@@ -1,8 +1,40 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-image: url("/images/unicorn-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+}
+.p-datatable .p-datatable-thead > tr > th {
+  background-color: transparent;
+  font-size: 20px;
+  font-weight: 750;
+}
+.p-datatable .p-datatable-tbody > tr {
+  background: transparent;
+  color: #4b5563;
+  transition: box-shadow 0.2s;
+  font-size: 20px;
+  font-weight: 750;
+}
+
+.unicorn-crud.fondo-gris {
+  background-image: url("/images/unicorn-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  min-height: 100vh;
   padding: 2rem;
+  max-width: 100%;
+  margin: 0 auto;
+
   text-align: center;
+  height: 100%;
 }
 
 .container {

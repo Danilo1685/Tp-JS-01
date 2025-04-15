@@ -39,7 +39,7 @@ function UnicornView() {
       {loading ? (
         <ProgressSpinner />
       ) : (
-        <DataTable value={unicorns} paginator rows={10} rowsPerPageOptions={[5, 10, 25]}>
+        <DataTable value={unicorns}>
           <Column field="name" header="Nombre" sortable />
           <Column field="age" header="Edad" sortable />
           <Column field="color" header="Color" sortable />
