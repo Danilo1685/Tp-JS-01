@@ -2,11 +2,16 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  height: 100%;
+  width: 100%;
+  
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  background-image: url(/public/images/unicorn-bg.png);
   background-color: #242424;
-
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -24,11 +29,9 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  background-image: url("/images/unicorn-bg.png");
+  background-color: transparent;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1 {
@@ -58,7 +61,7 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-image: url("/images/unicorn-bg.png");
+    background-color: #ffffff;
   }
   a:hover {
     color: #747bff;
@@ -66,4 +69,23 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bg-light {
+  background-color: transparent !important;
 }
