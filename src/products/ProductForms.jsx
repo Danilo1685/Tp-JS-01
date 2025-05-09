@@ -10,7 +10,7 @@ import { InputNumber } from 'primereact/inputnumber'
 import { Button } from 'primereact/button'
 import { ProgressSpinner } from 'primereact/progressspinner'
 
-const API_BASE = 'https://crudcrud.com/api/9e6ce7e1504e4dae995bc3df0f51fd6d/products'
+const API_BASE = 'https://crudcrud.com/api/d0a2e735c8fc4300a439b9e2acb53110/products'
 
 const validationSchema = Yup.object({
   nombre: Yup.string().required('Requerido'),
@@ -103,7 +103,7 @@ const ProductForm = () => {
 
   return (
     <div className="form-page" style={{ padding: '2rem' }}>
-      <h2 className="mb-4">{id ? '📝 Editar Producto' : '➕ Crear Producto'}</h2>
+      <h2 className="mb-4">{id ? 'Editar Producto' : 'Crear Producto'}</h2>
 
       {loading ? (
         <div className="flex justify-content-center align-items-center" style={{ height: '200px' }}>

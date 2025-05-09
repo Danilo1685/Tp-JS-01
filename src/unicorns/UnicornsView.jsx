@@ -8,15 +8,16 @@ import { Toast } from 'primereact/toast'
 import { ProgressSpinner } from 'primereact/progressspinner'
 import { useUnicorns } from '../context/UnicornContext'
 import { useTheme } from '../context/Context'
+import PdfGenerator from '../components/PdfGenerator'
 
 function UnicornsView() {
   const navigate = useNavigate()
+  const toast = useRef(null)
   const { unicorns, deleteUnicorn, loading } = useUnicorns()
   const { darkMode } = useTheme()
+
   const [search, setSearch] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
-  const toast = useRef(null)
-
   const perPage = 5
 
   const filteredUnicorns = unicorns.filter((u) =>
@@ -51,40 +52,28 @@ function UnicornsView() {
     }
   }
 
-  const actionBodyTemplate = (rowData) => {
-    return (
-      <div className="flex gap-2">
-        <Button
-          icon="pi pi-pencil"
-          className="p-button-rounded p-button-warning"
-          onClick={() => navigate(`/unicornios/editar/${rowData._id}`)}
-          tooltip="Editar"
-        />
-        <Button
-          icon="pi pi-trash"
-          className="p-button-rounded p-button-danger"
-          onClick={() => handleDelete(rowData._id)}
-          tooltip="Eliminar"
-        />
-      </div>
-    )
-  }
+  const actionBodyTemplate = (rowData) => (
+    <div className="flex gap-2">
+      <Button
+        icon="pi pi-pencil"
+        className="p-button-rounded p-button-warning"
+        onClick={() => navigate(`/unicornios/editar/${rowData._id}`)}
+        tooltip="Editar"
+      />
+      <Button
+        icon="pi pi-trash"
+        className="p-button-rounded p-button-danger"
+        onClick={() => handleDelete(rowData._id)}
+        tooltip="Eliminar"
+      />
+    </div>
+  )
 
   return (
     <div className={`unicorns-view ${darkMode ? 'dark-theme' : ''}`} style={{ padding: '2rem' }}>
       <Toast ref={toast} />
-      <div>
+
       <h2>🦄 Lista de Unicornios</h2>
-      {loading ? (
-        <p>Cargando...</p>
-      ) : (
-        unicorns.map((unicorn) => (
-          <div key={unicorn._id}>
-            {unicorn.nombre} - {unicorn.color}
-          </div>
-        ))
-      )}
-    </div>
 
       <div className="card">
         <div
@@ -93,11 +82,12 @@ function UnicornsView() {
         >
           <div style={{ display: 'flex', gap: '1rem' }}>
             <Button
-              label="➕ Nuevo Unicornio"
+              label="Nuevo Unicornio"
               icon="pi pi-plus"
               className="p-button-success"
               onClick={() => navigate('/unicornios/crear')}
             />
+            <PdfGenerator data={filteredUnicorns} />
           </div>
         </div>
 
@@ -119,14 +109,14 @@ function UnicornsView() {
           </div>
         ) : (
           <DataTable value={paginatedUnicorns} paginator={false} responsiveLayout="scroll">
-            <Column field="nombre" header="Nombre" sortable />
-            <Column field="color" header="Color" sortable />
-            <Column field="edad" header="Edad" sortable />
+            <Column field="nombre" header="Nombre" />
+            <Column field="color" header="Color" />
+            <Column field="poder" header="Poder" />
+            <Column field="edad" header="Edad" />
             <Column body={actionBodyTemplate} header="Acciones" style={{ textAlign: 'center' }} />
           </DataTable>
         )}
 
-        {/* Paginación manual */}
         {totalPages > 1 && (
           <div className="flex justify-content-center mt-3 gap-2">
             {Array.from({ length: totalPages }, (_, i) => (

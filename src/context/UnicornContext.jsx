@@ -1,8 +1,9 @@
 // src/context/UnicornContext.jsx
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import axios from 'axios';
 
 const UnicornContext = createContext();
-const API_URL = 'https://crudcrud.com/api/9e6ce7e1504e4dae995bc3df0f51fd6d/unicornios';
+const API_URL = 'https://crudcrud.com/api/d0a2e735c8fc4300a439b9e2acb53110/unicornios';
 
 export const UnicornProvider = ({ children }) => {
   const [unicorns, setUnicorns] = useState([]);
@@ -11,9 +12,8 @@ export const UnicornProvider = ({ children }) => {
   const getUnicorns = async () => {
     try {
       setLoading(true);
-      const res = await fetch(API_URL);
-      const data = await res.json();
-      setUnicorns(data);
+      const res = await axios.get(API_URL);
+      setUnicorns(res.data);
     } catch (err) {
       console.error('Error al cargar unicornios', err);
     } finally {
@@ -23,13 +23,8 @@ export const UnicornProvider = ({ children }) => {
 
   const createUnicorn = async (newUnicorn) => {
     try {
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newUnicorn),
-      });
-      const data = await res.json();
-      setUnicorns((prev) => [...prev, data]);
+      const res = await axios.post(API_URL, newUnicorn);
+      setUnicorns((prev) => [...prev, res.data]);
     } catch (err) {
       console.error('Error al crear unicornio', err);
     }
@@ -37,11 +32,7 @@ export const UnicornProvider = ({ children }) => {
 
   const editUnicorn = async (id, updatedUnicorn) => {
     try {
-      await fetch(`${API_URL}/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedUnicorn),
-      });
+      await axios.put(`${API_URL}/${id}`, updatedUnicorn);
       setUnicorns((prev) =>
         prev.map((u) => (u._id === id ? { ...u, ...updatedUnicorn } : u))
       );
@@ -52,9 +43,7 @@ export const UnicornProvider = ({ children }) => {
 
   const deleteUnicorn = async (id) => {
     try {
-      await fetch(`${API_URL}/${id}`, {
-        method: 'DELETE',
-      });
+      await axios.delete(`${API_URL}/${id}`);
       setUnicorns((prev) => prev.filter((u) => u._id !== id));
     } catch (err) {
       console.error('Error al eliminar unicornio', err);
